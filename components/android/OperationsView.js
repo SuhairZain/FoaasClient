@@ -13,7 +13,7 @@ import OperationsListItem from './OperationsListItem';
 class OperationsView extends Component {
     renderOperation(operation) {
         return (
-            <OperationsListItem operation={operation}/>
+            <OperationsListItem name={operation.name} key={operation.url} fields={operation.fields}/>
         );
     }
 

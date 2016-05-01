@@ -6,6 +6,7 @@
 import React, {
     Component,
     Text,
+    TouchableHighlight,
     View
 } from 'react-native';
 
@@ -15,14 +16,29 @@ import React, {
  </View>*/}
 
 class OperationsListItem extends Component {
+    onPress() {
+        console.error('PRESSES');
+        this.setState({count: ++this.state.count})
+    }
+
+    constructor(props){
+        super(props);
+        this.state = {
+            count: 0
+        };
+    }
+
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.title}>{this.props.operation.name}</Text>
-                {this.props.operation.fields.map(function (field){
-                    return (<Text>{field.name}</Text>);
-                })}
-            </View>
+            <TouchableHighlight key={this.props.key}>
+                <View style={styles.container} onPress={() => this.onPress}>
+                    <Text style={styles.title}>{this.props.name}</Text>
+                    <Text>{this.state.count}</Text>
+                    {this.props.fields.map(function (field){
+                        return (<Text key={field.field}>{field.name}</Text>);
+                    })}
+                </View>
+            </TouchableHighlight>
         );
     }
 }
