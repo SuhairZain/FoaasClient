@@ -1,5 +1,6 @@
 /**
- * Created by suhairzain on 1/5/16.
+ * Created by SuhairZain on 1/5/16.
+ * Licensed under the MIT License. Read LICENSE prior to usage.
  */
 
 import React, {

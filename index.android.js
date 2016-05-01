@@ -1,6 +1,6 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * Created by SuhairZain on 1/5/16.
+ * Licensed under the MIT License. Read LICENSE prior to usage.
  */
 
 import React, {
@@ -12,12 +12,18 @@ import React, {
 } from 'react-native';
 
 import LoadingSplashView from './components/android/LoadingSplashView';
+import OperationsView from './components/android/OperationsView';
 
 class FoaasClient extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            loaded: false
+        };
+    }
+
     render() {
-        return (
-            <LoadingSplashView></LoadingSplashView>
-        );
+        return this.state.loaded?<OperationsView/>:<LoadingSplashView/>;
     }
 }
 
