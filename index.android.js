@@ -6,6 +6,7 @@
 import React, {
     AppRegistry,
     Component,
+    ListView,
     StyleSheet,
     Text,
     View
@@ -14,16 +15,32 @@ import React, {
 import LoadingSplashView from './components/android/LoadingSplashView';
 import OperationsView from './components/android/OperationsView';
 
+import FOAAS_BASE_URL from './components/Endpoint';
+
 class FoaasClient extends Component {
     constructor(props){
         super(props);
         this.state = {
+            operations: new ListView.DataSource({
+                rowHasChanged: (row1, row2) => row1 !== row2
+            }),
             loaded: false
         };
     }
 
+    componentDidMount() {
+        fetch(FOAAS_BASE_URL + 'operations').
+            then((response) => response.json()).
+            then((response) => {
+                this.setState({
+                    operations: this.state.operations.cloneWithRows(response),
+                    loaded: true
+                })
+        }).done()
+    }
+
     render() {
-        return this.state.loaded?<OperationsView/>:<LoadingSplashView/>;
+        return this.state.loaded?<OperationsView operations={this.state.operations}/>:<LoadingSplashView/>;
     }
 }
 
